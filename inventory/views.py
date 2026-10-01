@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from .forms import ProductForm
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 class CustomLoginView(LoginView):
     template_name = 'inventory/login.html'
