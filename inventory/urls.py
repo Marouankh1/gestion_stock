@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import product_list, product_create, product_update, product_delete, CustomLoginView
+from .views import product_list, product_create, product_update, product_delete,
+    category_list, category_create, category_delete, CustomLoginView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -9,4 +10,7 @@ urlpatterns = [
     path('delete/<int:pk>/', product_delete, name='product_delete'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('categories/', category_list, name='category_list'),
+    path('categories/add/', category_create, name='category_add'),
+    path('categories/delete/<int:pk>/', category_delete, name='category_delete'),
 ]

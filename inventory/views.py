@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
-from .forms import ProductForm
+from .models import Product, Category
+from .forms import ProductForm, CategoryForm
 from django.contrib.auth.views import LoginView
 
 class CustomLoginView(LoginView):
@@ -46,3 +46,28 @@ def product_delete(request, pk):
         product.delete()
         return redirect('product_list')
     return render(request, 'inventory/product_confirm_delete.html', {'product': product})
+
+
+@login_required
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'inventory/category_list.html', {'categories': categories})
+
+@login_required
+def category_create(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('category_list')
+    else:
+        form = CategoryForm()
+    return render(request, 'inventory/category_form.html', {'form': form})
+
+@login_required
+def category_delete(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('category_list')
+    return render(request, 'inventory/category_confirm_delete.html', {'category': category})
