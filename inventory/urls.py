@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import product_list, product_create, product_update, product_delete,
-    category_list, category_create, category_delete, CustomLoginView
+from .views import product_list, product_create, product_update, product_delete, category_list, category_create, category_delete, CustomLoginView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
