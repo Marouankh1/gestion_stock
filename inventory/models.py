@@ -1,6 +1,5 @@
 from django.db import models
 
-# 1. Model Les Catégories
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="Nom de Catégorie")
     description = models.TextField(blank=True, null=True, verbose_name="Description")
@@ -8,7 +7,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# 2. Model Les Produits
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name="Nom du Produit")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="Catégorie")
